@@ -49,8 +49,8 @@ DEFINE_ENUM_STRINGS(TWIN_UPDATE_TYPE, TWIN_UPDATE_TYPE_VALUES);
 #define DEFAULT_TWIN_OPERATION_TIMEOUT_SECS				300.0
 
 static char* DEFAULT_DEVICES_PATH_FORMAT =				"%s/devices/%s";
-static char* DEFAULT_TWIN_SEND_LINK_SOURCE_NAME =		"twin";
-static char* DEFAULT_TWIN_RECEIVE_LINK_TARGET_NAME =	"twin";
+static char* DEFAULT_TWIN_SEND_LINK_SOURCE_NAME =		"twin/"; // TODO: remove trailing slash
+static char* DEFAULT_TWIN_RECEIVE_LINK_TARGET_NAME =	"twin/"; // TODO: remove trailing slash
 
 static const char* TWIN_OPERATION_PATCH =				"PATCH";
 static const char* TWIN_OPERATION_GET =					"GET";
@@ -132,7 +132,7 @@ static void update_state(TWIN_MESSENGER_INSTANCE* twin_msgr, TWIN_MESSENGER_STAT
 
 		if (twin_msgr->on_state_changed_callback != NULL)
 		{
-			twin_msgr->on_state_changed_callback(twin_msgr->on_message_received_context, previous_state, new_state);
+			twin_msgr->on_state_changed_callback(twin_msgr->on_state_changed_context, previous_state, new_state);
 		}
 	}
 }

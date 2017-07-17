@@ -116,8 +116,8 @@ static void on_umock_c_error(UMOCK_C_ERROR_CODE error_code)
 #define TEST_PROPERTIES_HANDLE                               (PROPERTIES_HANDLE)0x4492
 
 #define INDEFINITE_TIME                                      ((time_t)-1)
-#define DEFAULT_TWIN_SEND_LINK_SOURCE_NAME                   "twin"
-#define DEFAULT_TWIN_RECEIVE_LINK_TARGET_NAME                "twin"
+#define DEFAULT_TWIN_SEND_LINK_SOURCE_NAME                   "twin/" // TODO: remove trailing slash
+#define DEFAULT_TWIN_RECEIVE_LINK_TARGET_NAME                "twin/" // TODO: remove trailing slash
 
 #define TWIN_MESSAGE_PROPERTY_OPERATION                      "operation"
 #define TWIN_MESSAGE_PROPERTY_RESOURCE                       "resource"
@@ -150,6 +150,7 @@ static time_t g_initial_time_plus_90_secs;
 static time_t g_initial_time_plus_300_secs;
 
 static CONSTBUFFER TEST_CONSTBUFFER;
+
 
 // ---------- General Helpers ---------- //
 
