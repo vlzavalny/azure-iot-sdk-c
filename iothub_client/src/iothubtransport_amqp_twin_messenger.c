@@ -132,7 +132,7 @@ static void update_state(TWIN_MESSENGER_INSTANCE* twin_msgr, TWIN_MESSENGER_STAT
 
 		if (twin_msgr->on_state_changed_callback != NULL)
 		{
-			twin_msgr->on_state_changed_callback(twin_msgr->on_message_received_context, previous_state, new_state);
+			twin_msgr->on_state_changed_callback(twin_msgr->on_state_changed_context, previous_state, new_state);
 		}
 	}
 }
@@ -1320,6 +1320,11 @@ static void internal_twin_messenger_destroy(TWIN_MESSENGER_INSTANCE* twin_msgr)
 	}
 
 	// Codes_IOTHUBTRANSPORT_AMQP_TWIN_MESSENGER_09_102: [twin_messenger_destroy() shall release all memory allocated for and within `twin_msgr`]  
+	if (twin_msgr->client_version != NULL)
+	{
+		free(twin_msgr->client_version);
+	}
+
 	if (twin_msgr->device_id != NULL)
 	{
 		free(twin_msgr->device_id);
