@@ -887,6 +887,7 @@ static void on_send_complete_callback(void* context, MESSAGE_SEND_RESULT send_re
 
 static void on_process_message_callback(MESSAGE_QUEUE_HANDLE message_queue, MQ_MESSAGE_HANDLE message, PROCESS_MESSAGE_COMPLETED_CALLBACK on_process_message_completed_callback, void* context)
 {
+	LogInfo(">>>>>> on_process_message_callback (%p)", message);
 	// Codes_SRS_IOTHUBTRANSPORT_AMQP_MESSENGER_09_117: [If any argument is NULL, `on_process_message_callback` shall return immediatelly]
 	if (message_queue == NULL || message == NULL || on_process_message_completed_callback == NULL || context == NULL)
 	{
@@ -909,6 +910,8 @@ static void on_process_message_callback(MESSAGE_QUEUE_HANDLE message_queue, MQ_M
 		message_destroy((MESSAGE_HANDLE)message);
 		message_context->is_destroyed = true;
 	}
+
+	LogInfo("<<<<<< on_process_message_callback (%p)", message);
 }
 
 static void on_message_processing_completed_callback(MQ_MESSAGE_HANDLE message, MESSAGE_QUEUE_RESULT result, USER_DEFINED_REASON reason, void* message_context)

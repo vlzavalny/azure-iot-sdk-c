@@ -289,6 +289,8 @@ static int add_amqp_message_annotation(MESSAGE_HANDLE message, AMQP_VALUE msg_an
 	int result;
 	AMQP_VALUE msg_annotations;
 
+	LogInfo(">>>>>> add_amqp_message_annotation (%p)", message);
+
 	if ((msg_annotations = amqpvalue_create_message_annotations(msg_annotations_map)) == NULL)
 	{
 		LogError("Failed creating new AMQP message annotations");
@@ -308,6 +310,8 @@ static int add_amqp_message_annotation(MESSAGE_HANDLE message, AMQP_VALUE msg_an
 
 		annotations_destroy(msg_annotations);
 	}
+
+	LogInfo("<<<<<< add_amqp_message_annotation (%p)", message);
 
 	return result;
 }
@@ -939,6 +943,8 @@ static int send_twin_operation_request(TWIN_MESSENGER_INSTANCE* twin_msgr, TWIN_
 	int result;
 	MESSAGE_HANDLE amqp_message;
 
+	LogInfo(">>>>>> send_twin_operation_request");
+
 	if ((amqp_message = create_amqp_message_for_twin_operation(op_ctx->type, op_ctx->correlation_id, data)) == NULL)
 	{
 		LogError("Failed creating request message (%s, %s, %s)", twin_msgr->device_id, ENUM_TO_STRING(TWIN_OPERATION_TYPE, op_ctx->type), op_ctx->correlation_id);
@@ -962,6 +968,8 @@ static int send_twin_operation_request(TWIN_MESSENGER_INSTANCE* twin_msgr, TWIN_
 		}
 
 		message_destroy(amqp_message);
+
+		LogInfo("<<<<<< send_twin_operation_request (%p)", amqp_message);
 	}
 
 	return result;
