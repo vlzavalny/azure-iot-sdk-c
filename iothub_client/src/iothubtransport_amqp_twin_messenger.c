@@ -306,7 +306,7 @@ static int add_amqp_message_annotation(MESSAGE_HANDLE message, AMQP_VALUE msg_an
 			result = RESULT_OK;
 		}
 
-		amqpvalue_destroy(msg_annotations);
+		annotations_destroy(msg_annotations);
 	}
 
 	return result;
